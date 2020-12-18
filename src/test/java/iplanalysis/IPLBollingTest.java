@@ -95,6 +95,19 @@ public class IPLBollingTest {
         }
     }
 
+    @Test
+    public void given_IPLBollingCSV_Best_BestStrikeRate() {
+        try {
+            IPLBollingAnalyser iplBollingAnalyser = new IPLBollingAnalyser();
+            int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
+            List<IPLBolling> iplBollingCSVList = iplBollingAnalyser.maxWicketBestAvg();
+            int size = iplBollingCSVList.size();
+            Assert.assertEquals("Imran Tahir", iplBollingCSVList.get(size-1).playerName);
+        } catch (CSVBuilderException e) {
+            System.out.println("Error");
+        }
+    }
+
 
 
 

@@ -119,4 +119,18 @@ public class IPLBollingAnalyser {
         return iplBollingCSVList3;
     }
 
+    public List<IPLBolling> maxWicketBestAvg() throws CSVBuilderException {
+        List<IPLBolling> iplBollingCSVList2 = null;
+        if(iplBollingCSVList.size() == 0){
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        Comparator <IPLBolling> iplCSVComparator = Comparator.comparing(iplbolling -> iplbolling.wicketTaken);
+        this.sort(iplBollingCSVList,iplCSVComparator);
+        int size = iplBollingCSVList.size();
+        iplBollingCSVList2 = iplBollingCSVList.stream().filter(iplBolling -> (iplBolling.wicketTaken == iplBollingCSVList.get(size-1).wicketTaken)).collect(Collectors.toList());
+        Comparator <IPLBolling> iplCSVComparator2 = Comparator.comparing(iplbolling -> iplbolling.bollingAverage);
+        this.sort(iplBollingCSVList2,iplCSVComparator);
+        return iplBollingCSVList2;
+    }
+
 }

@@ -74,9 +74,22 @@ public class IPLBollingTest {
         try {
             IPLBollingAnalyser iplBollingAnalyser = new IPLBollingAnalyser();
             int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
-            List<IPLBolling> iplBollingCSVList = iplBollingAnalyser.getMAxStrikeRate5W();
+            List<IPLBolling> iplBollingCSVList = iplBollingAnalyser.getMaxAvgThenMaxStrike();
             int size = iplBollingCSVList.size();
             Assert.assertEquals("Alzarri Joseph", iplBollingCSVList.get(size-1).playerName);
+        } catch (CSVBuilderException e) {
+            System.out.println("Error");
+        }
+    }
+
+    @Test
+    public void given_IPLBollingCSV_BestAverage_BestStrikeRate() {
+        try {
+            IPLBollingAnalyser iplBollingAnalyser = new IPLBollingAnalyser();
+            int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
+            List<IPLBolling> iplBollingCSVList = iplBollingAnalyser.getMaxAvgThenMaxStrike();
+            int size = iplBollingCSVList.size();
+            Assert.assertEquals("Mujeeb Ur Rahman", iplBollingCSVList.get(0).playerName);
         } catch (CSVBuilderException e) {
             System.out.println("Error");
         }

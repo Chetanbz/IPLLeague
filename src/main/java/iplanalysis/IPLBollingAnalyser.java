@@ -103,4 +103,20 @@ public class IPLBollingAnalyser {
         return iplBollingCSVList2;
     }
 
+    public List<IPLBolling> getMaxAvgThenMaxStrike() throws CSVBuilderException {
+        List<IPLBolling> iplBollingCSVList2 = null;
+        List<IPLBolling> iplBollingCSVList3 = null;
+        if(iplBollingCSVList.size() == 0){
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        Comparator <IPLBolling> iplCSVComparator = Comparator.comparing(iplbolling -> iplbolling.bollingAverage);
+        Comparator <IPLBolling> iplCSVComparator2 = Comparator.comparing(iplbolling -> iplbolling.bollingStrikerate);
+        iplBollingCSVList2 = iplBollingCSVList.stream().filter(iplBolling -> (iplBolling.bollingStrikerate !=0)).filter(iplBolling -> (iplBolling.bollingAverage !=0)).collect(Collectors.toList());
+        int size = iplBollingCSVList2.size();
+        this.sort(iplBollingCSVList2,iplCSVComparator);
+        iplBollingCSVList3 = iplBollingCSVList2.subList(size-top,size);
+        this.sort(iplBollingCSVList3,iplCSVComparator2);
+        return iplBollingCSVList3;
+    }
+
 }

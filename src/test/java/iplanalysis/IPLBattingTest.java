@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Map;
+
 public class IPLBattingTest {
     private static final String IPL_BATTING_FILE_PATH = "D:\\eclipse-java-2020-09-R-win32-x86_64\\Week3,Workspace Eclipse\\IPLLeague\\src\\test\\resources\\IPL2019FactsheetMostRuns.csv";
     private static final String IPL_BOLLING_FILE_PATH = "D:\\eclipse-java-2020-09-R-win32-x86_64\\Week3,Workspace Eclipse\\IPLLeague\\src\\test\\resources\\IPL2019FactsheetMostWkts.csv";
@@ -72,6 +74,22 @@ public class IPLBattingTest {
             System.out.println("Error");
         }
     }
+
+    @Test
+    public void given_IPLBattingCSV_ShouldSortAndReturnMaximumStrikeRateSixAndFour() {
+        try {
+            IPLTeamAnalyser censusAnalyser = new IPLTeamAnalyser();
+            int numOfRecords = censusAnalyser.loadIPlBatting(IPL_BATTING_FILE_PATH);
+            String sortedBattingJason = censusAnalyser.getSortedStrikeRatebyFourSixList();
+            IPLBatting[] censusCSV = new Gson().fromJson(sortedBattingJason, IPLBatting[].class);
+            Assert.assertEquals("Kagiso Rabada", censusCSV[numOfRecords-1].playerName);
+
+        } catch (CSVBuilderException e) {
+            System.out.println("Error");
+        }
+    }
+
+    
 
 
 }

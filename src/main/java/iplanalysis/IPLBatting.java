@@ -10,6 +10,9 @@ public class IPLBatting {
     @CsvBindByPosition (position = 1)
     public String playerName;
 
+    @CsvBindByPosition(position = 3)
+    public int innings;
+
     @CsvBindByPosition(position = 4)
     public int notOuts;
 
@@ -22,6 +25,9 @@ public class IPLBatting {
     @CsvBindByPosition (position = 7)
     public double average;
 
+    @CsvBindByPosition (position = 8)
+    public int ballFaced;
+
     @CsvBindByPosition (position = 9)
     public double strikeRate;
 
@@ -30,6 +36,8 @@ public class IPLBatting {
 
     @CsvBindByPosition (position = 13)
     public int six;
+
+    public double emptySpace;
 
 
     @Override

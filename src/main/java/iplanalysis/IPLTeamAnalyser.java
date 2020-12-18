@@ -7,7 +7,10 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class IPLTeamAnalyser {
     List<IPLBatting> iplBattingCSVList = null;
@@ -97,6 +100,32 @@ public class IPLTeamAnalyser {
         this.sort(iplBattingCSVList,iplCSVComparator);
         String sortedStateCensusJason = new Gson().toJson(iplBattingCSVList);
         return sortedStateCensusJason;
+    }
+
+    public String getSortedStrikeRatebyFourSixList() throws CSVBuilderException {
+        if(iplBattingCSVList.size() == 0){
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        strikeRateWithSixAndFour();
+        Comparator <IPLBatting> iplCSVComparator = Comparator.comparing(iplBatting -> iplBatting.emptySpace);
+        this.sort(iplBattingCSVList,iplCSVComparator);
+        String sortedStateCensusJason = new Gson().toJson(iplBattingCSVList);
+        return sortedStateCensusJason;
+    }
+
+
+
+
+    private void strikeRateWithSixAndFour() throws CSVBuilderException {
+        if (iplBattingCSVList.size() == 0) {
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        for (IPLBatting i : iplBattingCSVList) {
+            int ballFaced = i.six + i.four;
+            if (ballFaced == 0) continue;
+            Double score = ((double)6 * i.six + 4 * i.four)/ballFaced;
+            i.emptySpace = score;
+        }
     }
 
 }

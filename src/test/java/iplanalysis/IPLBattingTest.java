@@ -1,5 +1,6 @@
 package iplanalysis;
 
+import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,6 +16,7 @@ public class IPLBattingTest {
             Assert.assertEquals(101,numOfRecords);
         } catch (CSVBuilderException e) { System.out.println("Error");}
     }
+
     @Test
     public void given_IPLBollingCSV_ShouldReturn_Count() {
         try {
@@ -23,5 +25,20 @@ public class IPLBattingTest {
             Assert.assertEquals(99,numOfRecords);
         } catch (CSVBuilderException e) { System.out.println("Error");}
     }
+
+    @Test
+    public void given_IPLBattingCSV_ShouldSortAndReturnMaximumAverage() {
+        try {
+            IPLTeamAnalyser censusAnalyser = new IPLTeamAnalyser();
+            int numOfRecords = censusAnalyser.loadIPlBatting(IPL_BATTING_FILE_PATH);
+            String sortedBattingJason = censusAnalyser.getSortedBattingList();
+            IPLBatting[] censusCSV = new Gson().fromJson(sortedBattingJason, IPLBatting[].class);
+            Assert.assertEquals("MS Dhoni", censusCSV[numOfRecords-1].playerName);
+
+        } catch (CSVBuilderException e) {
+            System.out.println("Error");
+        }
+    }
+
 
 }

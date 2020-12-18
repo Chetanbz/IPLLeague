@@ -20,10 +20,10 @@ public class IPLBatting {
     public String highestScore;
 
     @CsvBindByPosition (position = 7)
-    public String average;
+    public double average;
 
     @CsvBindByPosition (position = 9)
-    public String strikeRate;
+    public double strikeRate;
 
     @CsvBindByPosition (position = 12)
     public int four;

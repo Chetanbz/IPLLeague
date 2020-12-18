@@ -15,7 +15,7 @@ public class IPLBolling {
     public int runsGiven;
 
     @CsvBindByPosition (position = 6)
-    public String wicketTaken;
+    public int wicketTaken;
 
     @CsvBindByPosition (position = 8)
     public String bollingAverage;

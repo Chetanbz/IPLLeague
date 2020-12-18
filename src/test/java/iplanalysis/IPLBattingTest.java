@@ -104,9 +104,9 @@ public class IPLBattingTest {
             IPLTeamAnalyser iplTeamAnalyser = new IPLTeamAnalyser();
             iplTeamAnalyser.loadIPlBatting(IPL_BATTING_FILE_PATH);
             iplTeamAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
-            List<IPLBatting> allrounderList  = iplTeamAnalyser.bestBattingBollingAvg();
+            List<IPLBatting> allrounderList = iplTeamAnalyser.bestBattingBollingAvg();
             int size = allrounderList.size();
-            Assert.assertEquals("Marcus Stoinis", allrounderList.get(size-1).playerName);
+            Assert.assertEquals("Marcus Stoinis", allrounderList.get(size - 1).playerName);
 
         } catch (CSVBuilderException e) {
             System.out.println("Error");
@@ -119,15 +119,29 @@ public class IPLBattingTest {
             IPLTeamAnalyser iplTeamAnalyser = new IPLTeamAnalyser();
             iplTeamAnalyser.loadIPlBatting(IPL_BATTING_FILE_PATH);
             iplTeamAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
-            List<IPLBatting> allrounderList  = iplTeamAnalyser.MostRunAndWicket();
+            List<IPLBatting> allrounderList = iplTeamAnalyser.MostRunAndWicket();
             int size = allrounderList.size();
-            Assert.assertEquals("Hardik Pandya", allrounderList.get(size-1).playerName);
+            Assert.assertEquals("Hardik Pandya", allrounderList.get(size - 1).playerName);
 
         } catch (CSVBuilderException e) {
             System.out.println("Error");
         }
     }
 
+    @Test
+    public void given_IPLMaxHundreadMaxAvg() {
+        try {
+            IPLTeamAnalyser iplTeamAnalyser = new IPLTeamAnalyser();
+            iplTeamAnalyser.loadIPlBatting(IPL_BATTING_FILE_PATH);
+            iplTeamAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
+            List<IPLBatting> allrounderList = iplTeamAnalyser.getHundreadGoodBattingAvg();
+            int size = allrounderList.size();
+            Assert.assertEquals("Jonny Bairstow", allrounderList.get(size - 1).playerName);
+
+        } catch (CSVBuilderException e) {
+            System.out.println("Error");
+        }
+    }
 
 
 }

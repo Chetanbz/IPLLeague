@@ -154,6 +154,22 @@ public class IPLTeamAnalyser {
             i.emptySpace = score;
         }
     }
+
+    public List<IPLBatting> getHundreadGoodBattingAvg() throws CSVBuilderException {
+        List<IPLBatting> iplBattingList2 = null;
+        if (iplBattingCSVList.size() == 0) {
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        Comparator<IPLBatting> iplCSVComparator = Comparator.comparing(iplBatting -> iplBatting.hundread);
+        Comparator<IPLBatting> iplCSVComparator2 = Comparator.comparing(iplBatting -> iplBatting.average);
+        int size = iplBattingCSVList.size();
+        this.sort(iplBattingCSVList, iplCSVComparator);
+        iplBattingList2 = iplBattingCSVList.subList(size - 5, size);
+        this.sort(iplBattingList2, iplCSVComparator2);
+        return iplBattingList2;
+    }
+
+
     public List<IPLBatting> bestBattingBollingAvg() throws CSVBuilderException {
         List<IPLBatting> allRounderList = null;
         List<IPLBatting> allRounderList2 = null;

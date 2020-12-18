@@ -16,8 +16,10 @@ public class IPLBollingTest {
         try {
             IPLBollingAnalyser iplBollingAnalyser = new IPLBollingAnalyser();
             int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
-            Assert.assertEquals(99,numOfRecords);
-        } catch (CSVBuilderException e) { System.out.println("Error");}
+            Assert.assertEquals(99, numOfRecords);
+        } catch (CSVBuilderException e) {
+            System.out.println("Error");
+        }
     }
 
     @Test
@@ -37,7 +39,7 @@ public class IPLBollingTest {
         try {
             IPLBollingAnalyser iplBollingAnalyser = new IPLBollingAnalyser();
             int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
-            List<IPLBolling> iplBollingCSVList =  iplBollingAnalyser.getSortedBollingbyStrikeList();
+            List<IPLBolling> iplBollingCSVList = iplBollingAnalyser.getSortedBollingbyStrikeList();
             Assert.assertEquals("Alzarri Joseph", iplBollingCSVList.get(0).playerName);
         } catch (CSVBuilderException e) {
             System.out.println("Error");
@@ -63,7 +65,7 @@ public class IPLBollingTest {
             int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
             List<IPLBolling> iplBollingCSVList = iplBollingAnalyser.getMAxStrikeRate4W();
             int size = iplBollingCSVList.size();
-            Assert.assertEquals("Lasith Malinga", iplBollingCSVList.get(size-1).playerName);
+            Assert.assertEquals("Lasith Malinga", iplBollingCSVList.get(size - 1).playerName);
         } catch (CSVBuilderException e) {
             System.out.println("Error");
         }
@@ -76,7 +78,7 @@ public class IPLBollingTest {
             int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
             List<IPLBolling> iplBollingCSVList = iplBollingAnalyser.getMaxAvgThenMaxStrike();
             int size = iplBollingCSVList.size();
-            Assert.assertEquals("Krishnappa Gowtham", iplBollingCSVList.get(size-1).playerName);
+            Assert.assertEquals("Krishnappa Gowtham", iplBollingCSVList.get(size - 1).playerName);
         } catch (CSVBuilderException e) {
             System.out.println("Error");
         }
@@ -102,14 +104,11 @@ public class IPLBollingTest {
             int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
             List<IPLBolling> iplBollingCSVList = iplBollingAnalyser.maxWicketBestAvg();
             int size = iplBollingCSVList.size();
-            Assert.assertEquals("Imran Tahir", iplBollingCSVList.get(size-1).playerName);
+            Assert.assertEquals("Imran Tahir", iplBollingCSVList.get(size - 1).playerName);
         } catch (CSVBuilderException e) {
             System.out.println("Error");
         }
     }
-
-
-
 
 
 }

@@ -79,4 +79,24 @@ public class IPLTeamAnalyser {
         return sortedStateCensusJason;
     }
 
+    public String getSortedBattingbySixList() throws CSVBuilderException {
+        if(iplBattingCSVList.size() == 0){
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        Comparator <IPLBatting> iplCSVComparator = Comparator.comparing(iplBatting -> iplBatting.six);
+        this.sort(iplBattingCSVList,iplCSVComparator);
+        String sortedStateCensusJason = new Gson().toJson(iplBattingCSVList);
+        return sortedStateCensusJason;
+    }
+
+    public String getSortedBattingbyFourList() throws CSVBuilderException {
+        if(iplBattingCSVList.size() == 0){
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        Comparator <IPLBatting> iplCSVComparator = Comparator.comparing(iplBatting -> iplBatting.four);
+        this.sort(iplBattingCSVList,iplCSVComparator);
+        String sortedStateCensusJason = new Gson().toJson(iplBattingCSVList);
+        return sortedStateCensusJason;
+    }
+
 }

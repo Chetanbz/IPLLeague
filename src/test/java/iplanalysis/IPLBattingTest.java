@@ -54,5 +54,24 @@ public class IPLBattingTest {
         }
     }
 
+    @Test
+    public void given_IPLBattingCSV_ShouldSortAndReturnMaximumSixAndFour() {
+        try {
+            IPLTeamAnalyser censusAnalyser = new IPLTeamAnalyser();
+            int numOfRecords = censusAnalyser.loadIPlBatting(IPL_BATTING_FILE_PATH);
+
+            String sortedBattingJason = censusAnalyser.getSortedBattingbySixList();
+            IPLBatting[] censusCSV = new Gson().fromJson(sortedBattingJason, IPLBatting[].class);
+            Assert.assertEquals("Andre Russell", censusCSV[numOfRecords-1].playerName);
+
+            String sortedBattingJason2 = censusAnalyser.getSortedBattingbyFourList();
+            IPLBatting[] censusCSV2 = new Gson().fromJson(sortedBattingJason2, IPLBatting[].class);
+            Assert.assertEquals("Shikhar Dhawan", censusCSV2[numOfRecords-1].playerName);
+
+        } catch (CSVBuilderException e) {
+            System.out.println("Error");
+        }
+    }
+
 
 }

@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 public class IPLTeamAnalyser {
     List<IPLBatting> iplBattingCSVList = null;
     List<IPLBatting> iplBollingCSVList = null;
+    int top = 10;
 
     private <E> void sort( List<E> list, Comparator<E> censusCSVComparator) {
         for (int i =0; i<list.size(); i++){
@@ -113,8 +114,19 @@ public class IPLTeamAnalyser {
         return sortedStateCensusJason;
     }
 
-
-
+    public List<IPLBatting> getSortedBattingbyAverageGoodStrikeRateList() throws CSVBuilderException {
+        List<IPLBatting> iplBattingList2 = null;
+        if(iplBattingCSVList.size() == 0){
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        Comparator <IPLBatting> iplCSVComparator = Comparator.comparing(iplBatting -> iplBatting.average);
+        Comparator <IPLBatting> iplCSVComparator2 = Comparator.comparing(iplBatting -> iplBatting.strikeRate);
+        int size = iplBattingCSVList.size();
+        this.sort(iplBattingCSVList,iplCSVComparator);
+        iplBattingList2 = iplBattingCSVList.subList(size-11, size);
+        this.sort(iplBattingList2,iplCSVComparator2);
+        return iplBattingList2;
+    }
 
     private void strikeRateWithSixAndFour() throws CSVBuilderException {
         if (iplBattingCSVList.size() == 0) {

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Map;
 
 public class IPLBattingTest {
@@ -80,16 +81,16 @@ public class IPLBattingTest {
         try {
             IPLTeamAnalyser censusAnalyser = new IPLTeamAnalyser();
             int numOfRecords = censusAnalyser.loadIPlBatting(IPL_BATTING_FILE_PATH);
-            String sortedBattingJason = censusAnalyser.getSortedStrikeRatebyFourSixList();
-            IPLBatting[] censusCSV = new Gson().fromJson(sortedBattingJason, IPLBatting[].class);
-            Assert.assertEquals("Kagiso Rabada", censusCSV[numOfRecords-1].playerName);
+            List<IPLBatting> sortedAverageGoodStrikeRateList = censusAnalyser.getSortedBattingbyAverageGoodStrikeRateList();
+            int size = sortedAverageGoodStrikeRateList.size();
+            Assert.assertEquals("Andre Russell",sortedAverageGoodStrikeRateList.get(size-1).playerName);
 
         } catch (CSVBuilderException e) {
             System.out.println("Error");
         }
     }
 
-    
+
 
 
 }

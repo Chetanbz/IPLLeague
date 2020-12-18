@@ -168,6 +168,20 @@ public class IPLTeamAnalyser {
         return allRounderList2;
     }
 
+    public List<IPLBatting> MostRunAndWicket() throws CSVBuilderException {
+        List<IPLBatting> allRounderList = null;
+        List<IPLBatting> allRounderList2 = null;
+        giveMaxRunMaxWicket();
+        allRounderList = iplBattingCSVList.stream().filter(allRounder -> (allRounder.emptySpace != 0)).collect(Collectors.toList());
+        Comparator<IPLBatting> iplCSVComparator = Comparator.comparing(iplBatting -> iplBatting.runScored);
+        this.sort(allRounderList,iplCSVComparator);
+        int size = allRounderList.size();
+        Comparator<IPLBatting> iplCSVComparator2 = Comparator.comparing(iplBatting -> iplBatting .emptySpace);
+        allRounderList2 = allRounderList.subList(size-top,size);
+        this.sort(allRounderList2,iplCSVComparator2);
+        return allRounderList2;
+    }
+
     public void  giveMaxBattingAndBowllingAvg() throws CSVBuilderException {
         if (iplBattingCSVList.size() == 0) {
             throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
@@ -178,6 +192,21 @@ public class IPLTeamAnalyser {
                 String bollingPlayer = j.playerName;
                 if(bollingPlayer.equals(battingPlayer)){
                     i.emptySpace = j.bollingAverage;
+                    break;
+                }
+            }
+        }
+    }
+    public void  giveMaxRunMaxWicket() throws CSVBuilderException {
+        if (iplBattingCSVList.size() == 0) {
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        for (IPLBatting i : iplBattingCSVList) {
+            String battingPlayer = i.playerName;
+            for(IPLBolling j : iplBollingCSVList){
+                String bollingPlayer = j.playerName;
+                if(bollingPlayer.equals(battingPlayer)){
+                    i.emptySpace = j.wicketTaken;
                     break;
                 }
             }

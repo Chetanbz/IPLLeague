@@ -37,7 +37,7 @@ public class IPLBatting {
     @CsvBindByPosition (position = 13)
     public int six;
 
-    public double emptySpace;
+    public double emptySpace = 0.0;
 
 
     @Override

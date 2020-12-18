@@ -98,5 +98,21 @@ public class IPLBattingTest {
         }
     }
 
+    @Test
+    public void given_IPLAllrounderBestBattingBowlingAverage() {
+        try {
+            IPLTeamAnalyser iplTeamAnalyser = new IPLTeamAnalyser();
+            iplTeamAnalyser.loadIPlBatting(IPL_BATTING_FILE_PATH);
+            iplTeamAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
+            List<IPLBatting> allrounderList  = iplTeamAnalyser.bestBattingBollingAvg();
+            int size = allrounderList.size();
+            Assert.assertEquals("Marcus Stoinis", allrounderList.get(size-1).playerName);
+
+        } catch (CSVBuilderException e) {
+            System.out.println("Error");
+        }
+    }
+
+
 
 }

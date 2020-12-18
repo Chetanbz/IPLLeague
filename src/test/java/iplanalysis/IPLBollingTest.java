@@ -76,7 +76,7 @@ public class IPLBollingTest {
             int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
             List<IPLBolling> iplBollingCSVList = iplBollingAnalyser.getMaxAvgThenMaxStrike();
             int size = iplBollingCSVList.size();
-            Assert.assertEquals("Alzarri Joseph", iplBollingCSVList.get(size-1).playerName);
+            Assert.assertEquals("Krishnappa Gowtham", iplBollingCSVList.get(size-1).playerName);
         } catch (CSVBuilderException e) {
             System.out.println("Error");
         }
@@ -107,6 +107,7 @@ public class IPLBollingTest {
             System.out.println("Error");
         }
     }
+
 
 
 

@@ -90,6 +90,20 @@ public class IPLBattingTest {
         }
     }
 
+    @Test
+    public void given_IPLBattingCSV_MaxRunWithGoodAverage() {
+        try {
+            IPLTeamAnalyser censusAnalyser = new IPLTeamAnalyser();
+            int numOfRecords = censusAnalyser.loadIPlBatting(IPL_BATTING_FILE_PATH);
+            List<IPLBatting> MaxRunGoodAvg = censusAnalyser.getMaxRunGoodAvgList();
+            int size = MaxRunGoodAvg.size();
+            Assert.assertEquals("David Warner ",MaxRunGoodAvg.get(size-1).playerName);
+
+        } catch (CSVBuilderException e) {
+            System.out.println("Error");
+        }
+    }
+
 
 
 

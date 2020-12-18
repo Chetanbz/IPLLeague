@@ -128,6 +128,20 @@ public class IPLTeamAnalyser {
         return iplBattingList2;
     }
 
+    public List<IPLBatting> getMaxRunGoodAvgList() throws CSVBuilderException {
+        List<IPLBatting> iplBattingList2 = null;
+        if(iplBattingCSVList.size() == 0){
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        Comparator <IPLBatting> iplCSVComparator = Comparator.comparing(iplBatting -> iplBatting.runScored);
+        Comparator <IPLBatting> iplCSVComparator2 = Comparator.comparing(iplBatting -> iplBatting.average);
+        int size = iplBattingCSVList.size();
+        this.sort(iplBattingCSVList,iplCSVComparator);
+        iplBattingList2 = iplBattingCSVList.subList(size-11, size);
+        this.sort(iplBattingList2,iplCSVComparator2);
+        return iplBattingList2;
+    }
+
     private void strikeRateWithSixAndFour() throws CSVBuilderException {
         if (iplBattingCSVList.size() == 0) {
             throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);

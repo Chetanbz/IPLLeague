@@ -59,7 +59,7 @@ public class IPLTeamAnalyser {
         }
     }
 
-    public String getSortedBattingList() throws CSVBuilderException {
+    public String getSortedBattingbyAverageList() throws CSVBuilderException {
         if(iplBattingCSVList.size() == 0){
             throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
         }
@@ -68,5 +68,15 @@ public class IPLTeamAnalyser {
         String sortedStateCensusJason = new Gson().toJson(iplBattingCSVList);
         return sortedStateCensusJason;
     }
-    
+
+    public String getSortedBattingbyStrikeList() throws CSVBuilderException {
+        if(iplBattingCSVList.size() == 0){
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        Comparator <IPLBatting> iplCSVComparator = Comparator.comparing(iplBatting -> iplBatting.strikeRate);
+        this.sort(iplBattingCSVList,iplCSVComparator);
+        String sortedStateCensusJason = new Gson().toJson(iplBattingCSVList);
+        return sortedStateCensusJason;
+    }
+
 }

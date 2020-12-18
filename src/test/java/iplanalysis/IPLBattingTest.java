@@ -31,9 +31,23 @@ public class IPLBattingTest {
         try {
             IPLTeamAnalyser censusAnalyser = new IPLTeamAnalyser();
             int numOfRecords = censusAnalyser.loadIPlBatting(IPL_BATTING_FILE_PATH);
-            String sortedBattingJason = censusAnalyser.getSortedBattingList();
+            String sortedBattingJason = censusAnalyser.getSortedBattingbyAverageList();
             IPLBatting[] censusCSV = new Gson().fromJson(sortedBattingJason, IPLBatting[].class);
             Assert.assertEquals("MS Dhoni", censusCSV[numOfRecords-1].playerName);
+
+        } catch (CSVBuilderException e) {
+            System.out.println("Error");
+        }
+    }
+
+    @Test
+    public void given_IPLBattingCSV_ShouldSortAndReturnMaximumStrikeRate() {
+        try {
+            IPLTeamAnalyser censusAnalyser = new IPLTeamAnalyser();
+            int numOfRecords = censusAnalyser.loadIPlBatting(IPL_BATTING_FILE_PATH);
+            String sortedBattingJason = censusAnalyser.getSortedBattingbyStrikeList();
+            IPLBatting[] censusCSV = new Gson().fromJson(sortedBattingJason, IPLBatting[].class);
+            Assert.assertEquals("Ishant Sharma", censusCSV[numOfRecords-1].playerName);
 
         } catch (CSVBuilderException e) {
             System.out.println("Error");

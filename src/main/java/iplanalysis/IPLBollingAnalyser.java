@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class IPLBollingAnalyser {
     List<IPLBolling> iplBollingCSVList = null;
@@ -43,23 +44,63 @@ public class IPLBollingAnalyser {
     }
 
 
-    public String getSortedBollingbyAverageList() throws CSVBuilderException {
+    public List<IPLBolling> getSortedBollingbyAverageList() throws CSVBuilderException {
+        List<IPLBolling> iplBollingCSVList2 = null;
         if(iplBollingCSVList.size() == 0){
             throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
         }
         Comparator <IPLBolling> iplCSVComparator = Comparator.comparing(iplbolling -> iplbolling.bollingAverage);
         this.sort(iplBollingCSVList,iplCSVComparator);
-        String sortedStateCensusJason = new Gson().toJson(iplBollingCSVList);
-        return sortedStateCensusJason;
+        iplBollingCSVList2 = iplBollingCSVList.stream().filter(iplBolling -> (iplBolling.bollingAverage !=0)).collect(Collectors.toList());
+        return iplBollingCSVList2;
     }
 
-    public String getSortedBollingbyStrikeList() throws CSVBuilderException {
+    public List<IPLBolling> getSortedBollingbyStrikeList() throws CSVBuilderException {
+        List<IPLBolling> iplBollingCSVList2 = null;
         if(iplBollingCSVList.size() == 0){
             throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
         }
         Comparator <IPLBolling> iplCSVComparator = Comparator.comparing(iplbolling -> iplbolling.bollingStrikerate);
         this.sort(iplBollingCSVList,iplCSVComparator);
-        String sortedStateCensusJason = new Gson().toJson(iplBollingCSVList);
-        return sortedStateCensusJason;
+        iplBollingCSVList2 = iplBollingCSVList.stream().filter(iplBolling -> (iplBolling.bollingStrikerate !=0)).collect(Collectors.toList());
+        return iplBollingCSVList2;
     }
+
+    public List<IPLBolling> getSortedBollingbyEconomyList() throws CSVBuilderException {
+        List<IPLBolling> iplBollingCSVList2 = null;
+        if(iplBollingCSVList.size() == 0){
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        Comparator <IPLBolling> iplCSVComparator = Comparator.comparing(iplbolling -> iplbolling.bollingEconomy);
+        this.sort(iplBollingCSVList,iplCSVComparator);
+        iplBollingCSVList2 = iplBollingCSVList.stream().filter(iplBolling -> (iplBolling.bollingEconomy !=0)).collect(Collectors.toList());
+        return iplBollingCSVList2;
+    }
+
+    public List<IPLBolling> getMAxStrikeRate4W() throws CSVBuilderException {
+        List<IPLBolling> iplBollingCSVList2 = null;
+        if(iplBollingCSVList.size() == 0){
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        Comparator <IPLBolling> iplCSVComparator = Comparator.comparing(iplbolling -> iplbolling.bollingStrikerate);
+        Comparator <IPLBolling> iplCSVComparator2 = Comparator.comparing(iplbolling -> iplbolling.four_W);
+        iplBollingCSVList2 = iplBollingCSVList.stream().filter(iplBolling -> (iplBolling.four_W !=0)).collect(Collectors.toList());
+        this.sort(iplBollingCSVList2,iplCSVComparator);
+        this.sort(iplBollingCSVList2,iplCSVComparator2);
+        return iplBollingCSVList2;
+    }
+
+    public List<IPLBolling> getMAxStrikeRate5W() throws CSVBuilderException {
+        List<IPLBolling> iplBollingCSVList2 = null;
+        if(iplBollingCSVList.size() == 0){
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        Comparator <IPLBolling> iplCSVComparator = Comparator.comparing(iplbolling -> iplbolling.bollingStrikerate);
+        Comparator <IPLBolling> iplCSVComparator2 = Comparator.comparing(iplbolling -> iplbolling.five_W);
+        iplBollingCSVList2 = iplBollingCSVList.stream().filter(iplBolling -> (iplBolling.five_W !=0)).collect(Collectors.toList());
+        this.sort(iplBollingCSVList2,iplCSVComparator);
+        this.sort(iplBollingCSVList2,iplCSVComparator2);
+        return iplBollingCSVList2;
+    }
+
 }

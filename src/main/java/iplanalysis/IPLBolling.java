@@ -18,13 +18,19 @@ public class IPLBolling {
     public int wicketTaken;
 
     @CsvBindByPosition (position = 8)
-    public String bollingAverage;
+    public double bollingAverage;
 
     @CsvBindByPosition (position = 9)
-    public String bollingEconomy;
+    public double bollingEconomy;
 
     @CsvBindByPosition (position = 10)
-    public String bollingStrikerate;
+    public double bollingStrikerate;
+
+    @CsvBindByPosition (position = 11)
+    public int four_W;
+
+    @CsvBindByPosition (position = 12)
+    public int five_W;
 
     public String toString() {
         return "IndiaStateCode{" +

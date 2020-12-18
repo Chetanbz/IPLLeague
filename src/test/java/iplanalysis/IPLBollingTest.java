@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 public class IPLBollingTest {
     private static final String IPL_BATTING_FILE_PATH = "D:\\eclipse-java-2020-09-R-win32-x86_64\\Week3,Workspace Eclipse\\IPLLeague\\src\\test\\resources\\IPL2019FactsheetMostRuns.csv";
     private static final String IPL_BOLLING_FILE_PATH = "D:\\eclipse-java-2020-09-R-win32-x86_64\\Week3,Workspace Eclipse\\IPLLeague\\src\\test\\resources\\IPL2019FactsheetMostWkts.csv";
@@ -23,10 +25,8 @@ public class IPLBollingTest {
         try {
             IPLBollingAnalyser iplBollingAnalyser = new IPLBollingAnalyser();
             int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
-            String sortedBattingJason = iplBollingAnalyser.getSortedBollingbyAverageList();
-            IPLBolling[] censusCSV = new Gson().fromJson(sortedBattingJason, IPLBolling[].class);
-            Assert.assertEquals("Prasidh Krishna", censusCSV[numOfRecords-1].playerName);
-
+            List<IPLBolling> iplBollingCSVList = iplBollingAnalyser.getSortedBollingbyAverageList();
+            Assert.assertEquals("Anukul Roy", iplBollingCSVList.get(0).playerName);
         } catch (CSVBuilderException e) {
             System.out.println("Error");
         }
@@ -37,10 +37,46 @@ public class IPLBollingTest {
         try {
             IPLBollingAnalyser iplBollingAnalyser = new IPLBollingAnalyser();
             int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
-            String sortedBattingJason = iplBollingAnalyser.getSortedBollingbyStrikeList();
-            IPLBolling[] censusCSV = new Gson().fromJson(sortedBattingJason, IPLBolling[].class);
-            Assert.assertEquals("Alzarri Joseph", censusCSV[numOfRecords-1].playerName);
+            List<IPLBolling> iplBollingCSVList =  iplBollingAnalyser.getSortedBollingbyStrikeList();
+            Assert.assertEquals("Alzarri Joseph", iplBollingCSVList.get(0).playerName);
+        } catch (CSVBuilderException e) {
+            System.out.println("Error");
+        }
+    }
 
+    @Test
+    public void given_IPLBollingCSV_ShouldSortAndReturnBestEconomy() {
+        try {
+            IPLBollingAnalyser iplBollingAnalyser = new IPLBollingAnalyser();
+            int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
+            List<IPLBolling> iplBollingCSVList = iplBollingAnalyser.getSortedBollingbyEconomyList();
+            Assert.assertEquals("Shivam Dube", iplBollingCSVList.get(0).playerName);
+        } catch (CSVBuilderException e) {
+            System.out.println("Error");
+        }
+    }
+
+    @Test
+    public void given_IPLBollingCSV_BestStrikeRate_4W() {
+        try {
+            IPLBollingAnalyser iplBollingAnalyser = new IPLBollingAnalyser();
+            int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
+            List<IPLBolling> iplBollingCSVList = iplBollingAnalyser.getMAxStrikeRate4W();
+            int size = iplBollingCSVList.size();
+            Assert.assertEquals("Lasith Malinga", iplBollingCSVList.get(size-1).playerName);
+        } catch (CSVBuilderException e) {
+            System.out.println("Error");
+        }
+    }
+
+    @Test
+    public void given_IPLBollingCSV_BestStrikeRate_5W() {
+        try {
+            IPLBollingAnalyser iplBollingAnalyser = new IPLBollingAnalyser();
+            int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
+            List<IPLBolling> iplBollingCSVList = iplBollingAnalyser.getMAxStrikeRate5W();
+            int size = iplBollingCSVList.size();
+            Assert.assertEquals("Alzarri Joseph", iplBollingCSVList.get(size-1).playerName);
         } catch (CSVBuilderException e) {
             System.out.println("Error");
         }

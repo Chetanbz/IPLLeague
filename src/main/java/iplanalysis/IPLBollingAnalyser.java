@@ -52,4 +52,14 @@ public class IPLBollingAnalyser {
         String sortedStateCensusJason = new Gson().toJson(iplBollingCSVList);
         return sortedStateCensusJason;
     }
+
+    public String getSortedBollingbyStrikeList() throws CSVBuilderException {
+        if(iplBollingCSVList.size() == 0){
+            throw new CSVBuilderException("Invalid File", CSVBuilderException.ExceptionType.No_DATA);
+        }
+        Comparator <IPLBolling> iplCSVComparator = Comparator.comparing(iplbolling -> iplbolling.bollingStrikerate);
+        this.sort(iplBollingCSVList,iplCSVComparator);
+        String sortedStateCensusJason = new Gson().toJson(iplBollingCSVList);
+        return sortedStateCensusJason;
+    }
 }

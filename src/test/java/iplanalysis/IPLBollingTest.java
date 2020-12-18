@@ -32,7 +32,21 @@ public class IPLBollingTest {
         }
     }
 
-    
+    @Test
+    public void given_IPLBollingCSV_ShouldSortAndReturnBestStrikeRate() {
+        try {
+            IPLBollingAnalyser iplBollingAnalyser = new IPLBollingAnalyser();
+            int numOfRecords = iplBollingAnalyser.loadIPlBolling(IPL_BOLLING_FILE_PATH);
+            String sortedBattingJason = iplBollingAnalyser.getSortedBollingbyStrikeList();
+            IPLBolling[] censusCSV = new Gson().fromJson(sortedBattingJason, IPLBolling[].class);
+            Assert.assertEquals("Alzarri Joseph", censusCSV[numOfRecords-1].playerName);
+
+        } catch (CSVBuilderException e) {
+            System.out.println("Error");
+        }
+    }
+
+
 
 
 }
